@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analysis Result</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Reviews Sentiment Analysis</h1>
+        <div id="pie-chart"></div>
+        <div id="word-cloud"></div>
+        <p>{{ recommendation }}</p>
+        <a href="{{ url_for('download_pdf', product_type=product_type) }}">Download PDF Report</a>
+    </div>
+    <script>
+        var pie_data = JSON.parse('{{ pie_data | tojson | safe }}');
+        var pie_layout = {
+            title: 'Sentiment Distribution',
+            hole: 0.5,
+            textinfo: 'label+percent'
+        };
+        Plotly.newPlot('pie-chart', pie_data, pie_layout);
+
+        var img = document.createElement('img');
+        img.src = 'data:image/png;base64,{{ wordcloud_img }}';
+        document.getElementById('word-cloud').appendChild(img);
+    </script>
+</body>
+</html>

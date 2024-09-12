@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Reviews Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function generateReviewFields() {
+            var params = new URLSearchParams(window.location.search);
+            var sampleSize = params.get('sample-size');
+            var reviewFields = document.getElementById('review-fields');
+            reviewFields.innerHTML = '';
+
+            // Create hidden input fields to store sample size and product type
+            reviewFields.innerHTML += '<input type="hidden" id="hidden-sample-size" name="sample-size" value="' + sampleSize + '">';
+            reviewFields.innerHTML += '<input type="hidden" id="hidden-product-type" name="product-type" value="' + params.get('product-type') + '">';
+
+            for (var i = 1; i <= sampleSize; i++) {
+                reviewFields.innerHTML += '<label for="review' + i + '">Review ' + i + ':</label><br>' +
+                                          '<textarea id="review' + i + '" name="review' + i + '" rows="4" cols="50"></textarea><br><br>';
+            }
+        }
+        window.onload = generateReviewFields;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Reviews Sentiment Analysis</h1>
+        <form action="/analyze" method="post">
+            <div id="review-fields"></div>
+            <button type="submit">Analyze</button>
+        </form>
+    </div>
+</body>
+</html>

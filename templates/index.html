@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Reviews Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Product Reviews Sentiment Analysis</h1>
+        <form action="/page2" method="get">
+            <label for="product-type">Select the product type:</label><br>
+            <select id="product-type" name="product-type" required>
+                <option value="">Select</option>
+                <option value="fashion">Fashion Items</option>
+                <option value="household">Household Items</option>
+                <option value="movies">Movies</option>
+                <option value="flipkart">Flipkart</option>
+                <option value="amazon">Amazon</option>
+                <option value="zomato">Zomato</option>
+                <option value="swiggy">Swiggy</option>
+                <option value="restaurants">Restaurants</option>
+                <option value="others">Others</option>
+            </select><br><br>
+            <label for="sample-size">Choose the sample size (1-20):</label><br>
+            <select id="sample-size" name="sample-size" required>
+                <option value="">Select</option>
+                {% for i in range(1, 21) %}
+                    <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+            </select><br><br>
+            <button type="submit">Next</button>
+        </form>
+    </div>
+</body>
+</html>
